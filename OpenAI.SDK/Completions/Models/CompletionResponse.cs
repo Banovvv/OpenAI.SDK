@@ -19,6 +19,9 @@ namespace OpenAI.SDK.Completions.Models
         [JsonPropertyName("choices")]
         public Choice[]? Choices { get; set; }
 
+        [JsonPropertyName("usage")]
+        public Usage? TokenUsage { get; set; }
+
         public class Choice
         {
             [JsonPropertyName("text")]
@@ -32,6 +35,18 @@ namespace OpenAI.SDK.Completions.Models
 
             [JsonPropertyName("finish_reason")]
             public string? FinishReason { get; set; }
+        }
+
+        public class Usage
+        {
+            [JsonPropertyName("prompt_tokens")]
+            public int PromptTokens { get; set; }
+
+            [JsonPropertyName("completion_tokens")]
+            public int? CompletionTokens { get; set; }
+
+            [JsonPropertyName("total_tokens")]
+            public int? TotalTokens { get; set; }
         }
 
     }
