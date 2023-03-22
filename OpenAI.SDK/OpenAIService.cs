@@ -9,13 +9,19 @@ namespace OpenAI.SDK
     {
         private readonly string _token;
         private readonly HttpClient _httpClient;
-        private const string? BaseAddress = "https://api.openai.com/v1/";
+        private string BaseAddress = "https://api.openai.com/v1/{0}";
         private const string? CompletionsEndpoint = "completions";
 
         public OpenAIService(string token)
         {
             _token = token;
             _httpClient = new HttpClient();
+        }
+
+        public IOpenAIService ConfigureForAzure(string resourceName, string deploymentName)
+        {
+            BaseAddress = $"https://{resourceName}.openai.azure.com/openai/deployments/{deploymentName}/" + "{0}?api-version=2022-12-01";
+            return this;
         }
 
         public async Task<CompletionResponse?> GetCompletionAsync(
@@ -30,7 +36,7 @@ namespace OpenAI.SDK
                 new AuthenticationHeaderValue("Bearer", _token);
 
             var response = await _httpClient
-                .PostAsync(BaseAddress + CompletionsEndpoint, content, cancellationToken);
+                .PostAsync(string.Format(BaseAddress, CompletionsEndpoint), content, cancellationToken);
 
             try
             {
