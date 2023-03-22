@@ -4,7 +4,7 @@ namespace OpenAI.SDK
 {
     public interface IOpenAIService
     {
-        Task<CompletionResponse> GetCompletionAsync(
+        Task<CompletionResponse?> GetCompletionAsync(
             CompletionRequest request,
             CancellationToken cancellationToken);
     }
