@@ -20,7 +20,7 @@ namespace OpenAI.SDK
 
         public IOpenAIService ConfigureForAzure(string resourceName, string deploymentName)
         {
-            BaseAddress = $"https://{resourceName}.openai.azure.com/openai/deployments/{deploymentName}/" + "{0}?api-version=2022-12-01";
+            BaseAddress = $"https://{resourceName}.openai.azure.com/openai/deployments/{deploymentName}/{0}?api-version=2022-12-01";
             return this;
         }
 
