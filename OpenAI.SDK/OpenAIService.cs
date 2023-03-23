@@ -1,5 +1,7 @@
 ﻿using OpenAI.SDK.Completions.Models;
+using System.Net;
 using System.Net.Http.Headers;
+using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
 
@@ -41,17 +43,27 @@ namespace OpenAI.SDK
             try
             {
                 response.EnsureSuccessStatusCode();
+
+                var result = JsonSerializer
+                        .Deserialize<CompletionResponse>(await response.Content.ReadAsStringAsync(cancellationToken));
+
+                return result;
             }
             catch (Exception ex)
             {
-
-                await Console.Out.WriteLineAsync($"The request failed with the following error: {ex.Message}");
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new AuthenticationException("OpenAI rejected your authorization. Try checking your API Key.");
+                }
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    throw new HttpRequestException("OpenAI had an internal server error. Please retry your request.");
+                }
+                else
+                {
+                    throw new HttpRequestException(ex.ToString());
+                }
             }
-
-            var result = JsonSerializer
-                    .Deserialize<CompletionResponse>(await response.Content.ReadAsStringAsync(cancellationToken));
-
-            return result;
         }
     }
 }
