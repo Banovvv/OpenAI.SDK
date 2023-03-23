@@ -1,4 +1,5 @@
 ﻿using OpenAI.SDK.Completions.Models;
+using OpenAI.SDK.Images.Models;
 
 namespace OpenAI.SDK
 {
@@ -10,6 +11,10 @@ namespace OpenAI.SDK
 
         Task<CompletionResponse?> GetCompletionAsync(
             CompletionRequest request,
+            CancellationToken cancellationToken);
+
+        Task<ImageResponse?> GetImageAsync(
+            ImageRequest request,
             CancellationToken cancellationToken);
     }
 }

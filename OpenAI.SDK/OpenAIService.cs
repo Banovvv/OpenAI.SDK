@@ -1,4 +1,5 @@
 ﻿using OpenAI.SDK.Completions.Models;
+using OpenAI.SDK.Images.Models;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Authentication;
@@ -12,7 +13,8 @@ namespace OpenAI.SDK
         private readonly string _token;
         private readonly HttpClient _httpClient;
         private string BaseAddress = "https://api.openai.com/v1/{0}";
-        private const string? CompletionsEndpoint = "completions";
+        private const string CompletionsEndpoint = "completions";
+        private const string ImagesEndpoint = "images/generations";
 
         public OpenAIService(string token)
         {
@@ -64,6 +66,13 @@ namespace OpenAI.SDK
                     throw new HttpRequestException(ex.ToString());
                 }
             }
+        }
+
+        public async Task<ImageResponse?> GetImageAsync(
+            ImageRequest request,
+            CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
