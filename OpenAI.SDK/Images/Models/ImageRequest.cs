@@ -6,6 +6,11 @@ namespace OpenAI.SDK.Images.Models
     {
         public ImageRequest(string prompt)
         {
+            if (string.IsNullOrWhiteSpace(prompt))
+            {
+                throw new ArgumentNullException(nameof(prompt));
+            }
+
             Prompt = prompt;
         }
 
@@ -14,8 +19,26 @@ namespace OpenAI.SDK.Images.Models
             int? n = null,
             string? size = null,
             string? responseFormat = null)
+            : this(prompt)
         {
-            Prompt = prompt;
+            if (n < 1 || n > 10)
+            {
+                throw new ArgumentOutOfRangeException("Number of images to generate must be between 1 and 10", nameof(n));
+            }
+
+            if (size != "256x256" &&
+                size != "512x512" &&
+                size != "1024x1024")
+            {
+                throw new ArgumentOutOfRangeException("Image size must be one of 256x256, 512x512, or 1024x1024", nameof(size));
+            }
+
+            if (responseFormat != "url" &&
+                responseFormat != "b64_json")
+            {
+                throw new ArgumentOutOfRangeException("Response format must be either 'url' or 'b64_json'", nameof(responseFormat));
+            }
+
             N = n;
             Size = size;
             ResponseFormat = responseFormat;
