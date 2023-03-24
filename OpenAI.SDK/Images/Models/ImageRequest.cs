@@ -9,7 +9,9 @@ namespace OpenAI.SDK.Images.Models
         {
             if (string.IsNullOrWhiteSpace(prompt))
             {
-                throw new ArgumentNullException(nameof(prompt), ValidationMessages.Images.Prompt);
+                throw new ArgumentNullException(
+                    nameof(prompt),
+                    ValidationMessages.Images.Prompt);
             }
 
             Prompt = prompt;
@@ -24,17 +26,23 @@ namespace OpenAI.SDK.Images.Models
         {
             if (n < 1 || n > 10)
             {
-                throw new ArgumentOutOfRangeException(nameof(n), ValidationMessages.Images.N);
+                throw new ArgumentOutOfRangeException(
+                    nameof(n),
+                    ValidationMessages.Images.N);
             }
 
             if (!PossibleValues.Images.Size.Contains(size))
             {
-                throw new ArgumentOutOfRangeException(nameof(size), ValidationMessages.Images.Size);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    ValidationMessages.Images.Size);
             }
 
             if (!PossibleValues.Images.ResponseFormat.Contains(responseFormat))
             {
-                throw new ArgumentOutOfRangeException(nameof(responseFormat), ValidationMessages.Images.ResponseFormat);
+                throw new ArgumentOutOfRangeException(
+                    nameof(responseFormat),
+                    ValidationMessages.Images.ResponseFormat);
             }
 
             N = n;

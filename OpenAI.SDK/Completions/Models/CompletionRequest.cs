@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using OpenAI.SDK.Common.Constants;
+using System.Text.Json.Serialization;
 
 namespace OpenAI.SDK.Completions.Models
 {
@@ -8,6 +9,20 @@ namespace OpenAI.SDK.Completions.Models
             string model,
             string prompt)
         {
+            if (!PossibleValues.Completions.Model.Contains(model))
+            {
+                throw new ArgumentException(
+                    string.Format(ValidationMessages.Completions.Model, model),
+                    nameof(model));
+            }
+
+            if (string.IsNullOrWhiteSpace(prompt))
+            {
+                throw new ArgumentNullException(
+                    nameof(prompt),
+                    ValidationMessages.Completions.Prompt);
+            }
+
             Model = model;
             Prompt = prompt;
         }
@@ -22,9 +37,31 @@ namespace OpenAI.SDK.Completions.Models
             bool? stream = null,
             int? logProbs = null,
             string? stop = null)
+            : this(prompt, model)
         {
-            Model = model;
-            Prompt = prompt;
+            if (temperature < 0 ||
+                temperature > 2)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(n),
+                    ValidationMessages.Completions.Temperature);
+            }
+
+            if (topP < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(n),
+                    ValidationMessages.Completions.TopP);
+            }
+
+            if (logProbs < 0 ||
+                logProbs > 5)
+            {
+                throw new ArgumentOutOfRangeException
+                    (nameof(n),
+                    ValidationMessages.Completions.LogProbs);
+            }
+
             MaxTokens = maxTokens;
             Temperature = temperature;
             TopP = topP;
