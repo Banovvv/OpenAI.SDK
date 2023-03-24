@@ -71,5 +71,29 @@ namespace OpenAI.SDK.Tests.Completions.Models
                 .Throw<ArgumentOutOfRangeException>()
                 .WithMessage($"{ValidationMessages.Completions.Temperature} (Parameter '{nameof(temperature)}')");
         }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-10)]
+        public void GivenInvalidTopP_WhenConstructorIsInvoked_ThenArgumentOutOfRangeExceptionIsThrown(double topP)
+        {
+            Action action = () => new CompletionRequest(_model, _prompt, null, null, topP);
+
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Completions.TopP} (Parameter '{nameof(topP)}')");
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(10)]
+        public void GivenInvalidLogProbs_WhenConstructorIsInvoked_ThenArgumentOutOfRangeExceptionIsThrown(int logProbs)
+        {
+            Action action = () => new CompletionRequest(_model, _prompt, null, null, null, null, null, logProbs);
+
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Completions.LogProbs} (Parameter '{nameof(logProbs)}')");
+        }
     }
 }
