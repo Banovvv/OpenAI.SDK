@@ -31,14 +31,16 @@ namespace OpenAI.SDK.Images.Models
                     ValidationMessages.Images.N);
             }
 
-            if (!PossibleValues.Images.Size.Contains(size))
+            if (size != null &&
+                !PossibleValues.Images.Size.Contains(size))
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(size),
                     ValidationMessages.Images.Size);
             }
 
-            if (!PossibleValues.Images.ResponseFormat.Contains(responseFormat))
+            if (responseFormat != null &&
+                !PossibleValues.Images.ResponseFormat.Contains(responseFormat))
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(responseFormat),
