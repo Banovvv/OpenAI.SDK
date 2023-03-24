@@ -72,7 +72,40 @@ namespace OpenAI.SDK
             ImageRequest request,
             CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(request);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", _token);
+
+            var response = await _httpClient
+                .PostAsync(string.Format(BaseAddress, ImagesEndpoint), content, cancellationToken);
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+
+                var result = JsonSerializer
+                        .Deserialize<ImageResponse>(await response.Content.ReadAsStringAsync(cancellationToken));
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new AuthenticationException("OpenAI rejected your authorization. Try checking your API Key.");
+                }
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    throw new HttpRequestException("OpenAI had an internal server error. Please retry your request.");
+                }
+                else
+                {
+                    throw new HttpRequestException(ex.ToString());
+                }
+            }
         }
     }
 }
