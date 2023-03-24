@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using OpenAI.SDK.Common.Constants;
+using System.Text.Json.Serialization;
 
 namespace OpenAI.SDK.Images.Models
 {
@@ -8,7 +9,7 @@ namespace OpenAI.SDK.Images.Models
         {
             if (string.IsNullOrWhiteSpace(prompt))
             {
-                throw new ArgumentNullException(nameof(prompt));
+                throw new ArgumentNullException(nameof(prompt), ValidationMessages.Images.Prompt);
             }
 
             Prompt = prompt;
@@ -23,20 +24,17 @@ namespace OpenAI.SDK.Images.Models
         {
             if (n < 1 || n > 10)
             {
-                throw new ArgumentOutOfRangeException("Number of images to generate must be between 1 and 10", nameof(n));
+                throw new ArgumentOutOfRangeException(nameof(n), ValidationMessages.Images.N);
             }
 
-            if (size != "256x256" &&
-                size != "512x512" &&
-                size != "1024x1024")
+            if (!PossibleValues.Images.Size.Contains(size))
             {
-                throw new ArgumentOutOfRangeException("Image size must be one of 256x256, 512x512, or 1024x1024", nameof(size));
+                throw new ArgumentOutOfRangeException(nameof(size), ValidationMessages.Images.Size);
             }
 
-            if (responseFormat != "url" &&
-                responseFormat != "b64_json")
+            if (!PossibleValues.Images.ResponseFormat.Contains(responseFormat))
             {
-                throw new ArgumentOutOfRangeException("Response format must be either 'url' or 'b64_json'", nameof(responseFormat));
+                throw new ArgumentOutOfRangeException(nameof(responseFormat), ValidationMessages.Images.ResponseFormat);
             }
 
             N = n;

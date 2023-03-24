@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
+using OpenAI.SDK.Common.Constants;
 using OpenAI.SDK.Images.Models;
+using System.Reflection.Metadata;
 
 namespace OpenAI.SDK.Tests.Images.Models
 {
@@ -51,7 +53,9 @@ namespace OpenAI.SDK.Tests.Images.Models
 
             Action action = () => new ImageRequest(prompt, n, size, responseFormat);
 
-            action.Should().Throw<ArgumentNullException>();
+            action.Should()
+                .Throw<ArgumentNullException>()
+                .WithMessage($"{ValidationMessages.Images.Prompt} (Parameter '{nameof(prompt)}')");
         }
 
         [Theory]
@@ -66,7 +70,9 @@ namespace OpenAI.SDK.Tests.Images.Models
 
             Action action = () => new ImageRequest(prompt, n, size, responseFormat);
 
-            action.Should().Throw<ArgumentOutOfRangeException>();
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Images.N} (Parameter '{nameof(n)}')");
         }
 
         [Theory]
@@ -81,7 +87,9 @@ namespace OpenAI.SDK.Tests.Images.Models
 
             Action action = () => new ImageRequest(prompt, n, size, responseFormat);
 
-            action.Should().Throw<ArgumentOutOfRangeException>();
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Images.Size} (Parameter '{nameof(size)}')");
         }
 
         [Theory]
@@ -96,7 +104,9 @@ namespace OpenAI.SDK.Tests.Images.Models
 
             Action action = () => new ImageRequest(prompt, n, size, responseFormat);
 
-            action.Should().Throw<ArgumentOutOfRangeException>();
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Images.ResponseFormat} (Parameter '{nameof(responseFormat)}')");
         }
     }
 }
