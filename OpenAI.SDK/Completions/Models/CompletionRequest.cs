@@ -52,7 +52,7 @@ namespace OpenAI.SDK.Completions.Models
                 topP < 0)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(n),
+                    nameof(topP),
                     ValidationMessages.Completions.TopP);
             }
 
@@ -61,7 +61,7 @@ namespace OpenAI.SDK.Completions.Models
                 logProbs > 5)
             {
                 throw new ArgumentOutOfRangeException
-                    (nameof(n),
+                    (nameof(logProbs),
                     ValidationMessages.Completions.LogProbs);
             }
 
