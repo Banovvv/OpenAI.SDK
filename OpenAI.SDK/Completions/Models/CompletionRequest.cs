@@ -37,7 +37,7 @@ namespace OpenAI.SDK.Completions.Models
             bool? stream = null,
             int? logProbs = null,
             string? stop = null)
-            : this(prompt, model)
+            : this(model, prompt)
         {
             if (temperature < 0 ||
                 temperature > 2)

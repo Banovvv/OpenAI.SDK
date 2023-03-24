@@ -6,8 +6,8 @@ namespace OpenAI.SDK.Tests.Completions.Models.Builders
 {
     public class CompletionRequestBuilderTests
     {
-        private readonly string _model = "some model";
-        private readonly string _prompt = "some prompt";
+        private readonly string _model = "text-davinci-003";
+        private readonly string _prompt = "Why is Grogu so cute?";
         private readonly int _maxTokens = 1;
         private readonly double _temperature = 1.0;
         private readonly double _topP = 1.0;
