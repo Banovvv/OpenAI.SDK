@@ -39,22 +39,25 @@ namespace OpenAI.SDK.Completions.Models
             string? stop = null)
             : this(model, prompt)
         {
-            if (temperature < 0 ||
+            if (temperature != null &&
+                temperature < 0 ||
                 temperature > 2)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(n),
+                    nameof(temperature),
                     ValidationMessages.Completions.Temperature);
             }
 
-            if (topP < 0)
+            if (topP != null &&
+                topP < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(n),
                     ValidationMessages.Completions.TopP);
             }
 
-            if (logProbs < 0 ||
+            if (logProbs != null &&
+                logProbs < 0 ||
                 logProbs > 5)
             {
                 throw new ArgumentOutOfRangeException

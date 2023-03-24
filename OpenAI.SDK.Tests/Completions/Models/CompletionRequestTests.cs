@@ -6,6 +6,10 @@ namespace OpenAI.SDK.Tests.Completions.Models
 {
     public class CompletionRequestTests
     {
+        private readonly string _model = "text-davinci-003";
+        private readonly string _prompt = "Why is Grogu so cute?";
+        private readonly double _temperature = 1;
+
         [Theory]
         [InlineData("text-ada-001")]
         [InlineData("text-curie-001")]
@@ -54,6 +58,18 @@ namespace OpenAI.SDK.Tests.Completions.Models
             action.Should()
                 .Throw<ArgumentNullException>()
                 .WithMessage($"{ValidationMessages.Completions.Prompt} (Parameter '{nameof(prompt)}')");
+        }
+
+        [Theory]
+        [InlineData(2.1)]
+        [InlineData(-1.1)]
+        public void GivenInvalidTemerature_WhenConstructorIsInvoked_ThenArgumentOutOfRangeExceptionIsThrown(double temperature)
+        {
+            Action action = () => new CompletionRequest(_model, _prompt, null, temperature);
+
+            action.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ValidationMessages.Completions.Temperature} (Parameter '{nameof(temperature)}')");
         }
     }
 }
