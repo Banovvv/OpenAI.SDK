@@ -3,7 +3,6 @@ using OpenAI.SDK.Images.Models;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 
