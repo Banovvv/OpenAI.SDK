@@ -9,6 +9,11 @@ namespace OpenAI.SDK
             string resourceName,
             string deploymentName);
 
+        IOpenAIService ConfigureForAzure(
+            string resourceName,
+            string deploymentName,
+            string apiVersion);
+
         Task<CompletionResponse?> GetCompletionAsync(
             CompletionRequest request,
             CancellationToken cancellationToken);

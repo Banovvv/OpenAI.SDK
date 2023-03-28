@@ -3,6 +3,7 @@ using OpenAI.SDK.Images.Models;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 
@@ -25,6 +26,12 @@ namespace OpenAI.SDK
         public IOpenAIService ConfigureForAzure(string resourceName, string deploymentName)
         {
             BaseAddress = $"https://{resourceName}.openai.azure.com/openai/deployments/{deploymentName}/{0}?api-version=2022-12-01";
+            return this;
+        }
+
+        public IOpenAIService ConfigureForAzure(string resourceName, string deploymentName, string apiVersion)
+        {
+            BaseAddress = $"https://{resourceName}.openai.azure.com/openai/deployments/{deploymentName}/{0}?api-version={apiVersion}";
             return this;
         }
 
