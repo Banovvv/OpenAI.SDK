@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenAI.SDK.Completions.Models;
+using System.Text.Json.Serialization;
 
 namespace OpenAI.SDK.Chat.Models
 {
     public class ChatRequest
     {
+        [JsonPropertyName("model")]
+        public string Model { get; set; }
+
+
+        [JsonPropertyName("messages")]
+        public IEnumerable<ChatMessage> Messages { get; set; }
     }
 }
