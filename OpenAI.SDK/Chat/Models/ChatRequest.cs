@@ -51,21 +51,21 @@ namespace OpenAI.SDK.Chat.Models
             }
 
             if (frequencyPenalty != null &&
-                frequencyPenalty < 0 ||
+                frequencyPenalty < -2 ||
                 frequencyPenalty > 2)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(presencePenalty),
-                    ValidationMessages.Chat.Temperature);
+                    ValidationMessages.Chat.FrequencyPenalty);
             }
 
             if (presencePenalty != null &&
-                presencePenalty < 0 ||
+                presencePenalty < -2 ||
                 presencePenalty > 2)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(presencePenalty),
-                    ValidationMessages.Chat.Temperature);
+                    ValidationMessages.Chat.PresencePenalty);
             }
 
 
