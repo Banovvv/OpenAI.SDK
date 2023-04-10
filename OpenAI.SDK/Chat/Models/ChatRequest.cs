@@ -27,7 +27,10 @@ namespace OpenAI.SDK.Chat.Models
             double? temperature = null,
             double? topP = null,
             int? n = null,
-            bool? stream = null)
+            bool? stream = null,
+            double? frequencyPenalty = null,
+            double? presencePenalty = null,
+            string? user = null)
             : this(model, messages)
         {
             if (temperature != null &&
@@ -47,11 +50,33 @@ namespace OpenAI.SDK.Chat.Models
                     ValidationMessages.Chat.TopP);
             }
 
+            if (frequencyPenalty != null &&
+                frequencyPenalty < 0 ||
+                frequencyPenalty > 2)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(presencePenalty),
+                    ValidationMessages.Chat.Temperature);
+            }
+
+            if (presencePenalty != null &&
+                presencePenalty < 0 ||
+                presencePenalty > 2)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(presencePenalty),
+                    ValidationMessages.Chat.Temperature);
+            }
+
+
             MaxTokens = maxTokens;
             Temperature = temperature;
             TopP = topP;
             N = n;
             Stream = stream;
+            FrequencyPenalty = frequencyPenalty;
+            PresencePenalty = presencePenalty;
+            User = user;
         }
 
         /// <summary>
@@ -116,18 +141,21 @@ namespace OpenAI.SDK.Chat.Models
 		/// Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim. Number between -2.0 and 2.0. Defaults to 0.
 		/// </summary>
 		[JsonPropertyName("frequency_penalty")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public double? FrequencyPenalty { get; set; }
 
         /// <summary>
         /// Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics. Number between -2.0 and 2.0. Defaults to 0.
         /// </summary>
         [JsonPropertyName("presence_penalty")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public double? PresencePenalty { get; set; }
 
         /// <summary>
 		/// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
 		/// </summary>
 		[JsonPropertyName("user")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? User { get; set; }
     }
 }
