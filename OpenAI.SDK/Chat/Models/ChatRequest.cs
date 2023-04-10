@@ -68,7 +68,6 @@ namespace OpenAI.SDK.Chat.Models
                     ValidationMessages.Chat.PresencePenalty);
             }
 
-
             MaxTokens = maxTokens;
             Temperature = temperature;
             TopP = topP;
