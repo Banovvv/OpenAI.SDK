@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.SDK.Completions.Models
+namespace OpenAI.SDK.Chat.Models
 {
     public class ChatMessage
     {
