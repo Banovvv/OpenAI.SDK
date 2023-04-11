@@ -40,6 +40,9 @@ namespace OpenAI.SDK.Completions.Models
             public string? FinishReason { get; set; }
         }
 
+        /// <summary>
+		/// The usage statistics for the interaction
+		/// </summary>
         public class Usage
         {
             [JsonPropertyName("prompt_tokens")]
@@ -51,6 +54,5 @@ namespace OpenAI.SDK.Completions.Models
             [JsonPropertyName("total_tokens")]
             public int? TotalTokens { get; set; }
         }
-
     }
 }
