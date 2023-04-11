@@ -1,4 +1,5 @@
-﻿using OpenAI.SDK.Completions.Models;
+﻿using OpenAI.SDK.Chat.Models;
+using OpenAI.SDK.Completions.Models;
 using OpenAI.SDK.Images.Models;
 using System.Net;
 using System.Net.Http.Headers;
@@ -112,6 +113,11 @@ namespace OpenAI.SDK
                     throw new HttpRequestException(ex.ToString());
                 }
             }
+        }
+
+        public Task<ChatResponse?> GetChatResponseAsync(ChatRequest request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

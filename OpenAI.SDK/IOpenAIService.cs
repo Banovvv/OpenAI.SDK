@@ -1,4 +1,5 @@
-﻿using OpenAI.SDK.Completions.Models;
+﻿using OpenAI.SDK.Chat.Models;
+using OpenAI.SDK.Completions.Models;
 using OpenAI.SDK.Images.Models;
 
 namespace OpenAI.SDK
@@ -13,6 +14,10 @@ namespace OpenAI.SDK
             string resourceName,
             string deploymentName,
             string apiVersion);
+
+        Task<ChatResponse?> GetChatResponseAsync(
+            ChatRequest request,
+            CancellationToken cancellationToken);
 
         Task<CompletionResponse?> GetCompletionAsync(
             CompletionRequest request,
