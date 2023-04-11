@@ -134,6 +134,7 @@ namespace OpenAI.SDK.Chat.Builders
                 TopP,
                 N,
                 Stream,
+                Stop,
                 FrequencyPenalty,
                 PresencePenalty,
                 User);

@@ -28,6 +28,7 @@ namespace OpenAI.SDK.Chat.Models
             double? topP = null,
             int? n = null,
             bool? stream = null,
+            string? stop = null,
             double? frequencyPenalty = null,
             double? presencePenalty = null,
             string? user = null)
@@ -73,6 +74,7 @@ namespace OpenAI.SDK.Chat.Models
             TopP = topP;
             N = n;
             Stream = stream;
+            Stop = stop;
             FrequencyPenalty = frequencyPenalty;
             PresencePenalty = presencePenalty;
             User = user;

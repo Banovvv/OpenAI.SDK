@@ -2,7 +2,7 @@
 using OpenAI.SDK.Completions.Builders;
 using OpenAI.SDK.Completions.Models;
 
-namespace OpenAI.SDK.Tests.Completions.Models.Builders
+namespace OpenAI.SDK.Tests.Completions.Builders
 {
     public class CompletionRequestBuilderTests
     {
