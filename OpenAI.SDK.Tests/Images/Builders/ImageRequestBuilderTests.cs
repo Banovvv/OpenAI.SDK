@@ -2,7 +2,7 @@
 using OpenAI.SDK.Images.Builders;
 using OpenAI.SDK.Images.Models;
 
-namespace OpenAI.SDK.Tests.Images.Models.Builders
+namespace OpenAI.SDK.Tests.Images.Builders
 {
     public class ImageRequestBuilderTests
     {

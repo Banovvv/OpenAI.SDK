@@ -2,6 +2,16 @@
 {
     public static class ValidationMessages
     {
+        public static class Chat
+        {
+            public const string Model = "{0} is not a valid model!";
+            public const string Temperature = "Temperature must be between 0 and 2!";
+            public const string TopP = "ToP must not be less that 0!";
+
+            public const string FrequencyPenalty = "Frequency Penalty must be between -2.0 and 2.0!";
+            public const string PresencePenalty = "Presence Penalty must be between -2.0 and 2.0!";
+        }
+
         public static class Completions
         {
             public const string Model = "{0} is not a valid model!";
