@@ -2,6 +2,9 @@
 {
     public static class ValidationMessages
     {
+        public const string AuthenticationExceptionMessage = "OpenAI rejected your authorization. Check your API Key.";
+        public const string HttpRequestExceptionMessage = "OpenAI had an internal server error. Retry your request.";
+
         public static class Chat
         {
             public const string Model = "{0} is not a valid model!";

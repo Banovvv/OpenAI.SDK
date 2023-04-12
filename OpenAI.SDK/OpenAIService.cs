@@ -1,4 +1,5 @@
 ﻿using OpenAI.SDK.Chat.Models;
+using OpenAI.SDK.Common.Constants;
 using OpenAI.SDK.Completions.Models;
 using OpenAI.SDK.Images.Models;
 using System.Net;
@@ -131,11 +132,11 @@ namespace OpenAI.SDK
         {
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new AuthenticationException("OpenAI rejected your authorization. Try checking your API Key.");
+                throw new AuthenticationException(ValidationMessages.AuthenticationExceptionMessage);
             }
             else if (response.StatusCode == HttpStatusCode.InternalServerError)
             {
-                throw new HttpRequestException("OpenAI had an internal server error. Please retry your request.");
+                throw new HttpRequestException(ValidationMessages.HttpRequestExceptionMessage);
             }
             else
             {
